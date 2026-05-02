@@ -2,7 +2,7 @@
 
 Инструмент для автоматической замены цветовых значений в CSS на кастомные переменные (`--color-N`).
 
-**[→ Открыть инструмент](https://glaamur.github.io/portfolio/Привязка%20цветов%20к%20переменным/)**
+<a href="https://dorohov.pro/servisy/privyazka-czvetov-k-peremennym/" target="_blank"><strong>→ Открыть инструмент</strong></a>
 
 ---
 
@@ -62,7 +62,7 @@
 ## Стек
 
 - Vanilla JS — вся логика конвертации на клиенте
-- PHP — опциональный серверный fallback (оригинальная версия на [dorohov.pro](https://dorohov.pro/servisy/privyazka-czvetov-k-peremennym/))
+- PHP — опциональный серверный fallback (оригинальная версия на <a href="https://dorohov.pro/servisy/privyazka-czvetov-k-peremennym/" target="_blank">dorohov.pro</a>)
 - Никаких зависимостей и сборщиков
 
 ## Файлы
