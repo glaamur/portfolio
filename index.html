@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>glaamur · portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #f5f2eb;
+            --text: #1a1a18;
+            --muted: #999;
+            --border: #ddd;
+            --border-strong: #1a1a18;
+            --accent: #c0392b;
+            --surface: #eeeae0;
+            --radius: 8px;
+        }
+
+        html { background: var(--bg); }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'JetBrains Mono', monospace;
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        .wrap {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 3rem 2rem 5rem;
+        }
+
+        /* ── HEADER ── */
+        .header {
+            margin-bottom: 2.5rem;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .issue {
+            font-size: 9px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .issue span {
+            color: var(--accent);
+        }
+
+        .date {
+            font-size: 9px;
+            letter-spacing: .1em;
+            color: var(--muted);
+        }
+
+        /* masthead */
+        .masthead {
+            border-top: 2px solid var(--border-strong);
+            border-bottom: 2px solid var(--border-strong);
+            padding: 1.5rem 0;
+            margin-bottom: 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: end;
+            gap: 2rem;
+        }
+
+        .name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 700;
+            letter-spacing: -.03em;
+            line-height: .9;
+            color: var(--text);
+        }
+
+        .name em {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--accent);
+        }
+
+        .masthead-meta {
+            text-align: right;
+            font-size: 10px;
+            color: var(--muted);
+            line-height: 2;
+            border-left: 0.5px solid var(--border);
+            padding-left: 1.5rem;
+        }
+
+        .masthead-meta strong {
+            color: var(--text);
+            display: block;
+            font-size: 11px;
+        }
+
+        .tagline {
+            font-size: 11px;
+            color: var(--muted);
+            border-left: 2px solid var(--accent);
+            padding-left: .75rem;
+            line-height: 1.7;
+        }
+
+        /* ── BODY ── */
+        .body {
+            display: grid;
+            grid-template-columns: 1fr 200px;
+            gap: 2.5rem;
+            border-top: 0.5px solid var(--border);
+            padding-top: 2rem;
+        }
+
+        @media (max-width: 640px) {
+            .body { grid-template-columns: 1fr; }
+            .masthead { grid-template-columns: 1fr; }
+            .masthead-meta { text-align: left; border-left: none; border-top: 0.5px solid var(--border); padding-left: 0; padding-top: .75rem; }
+        }
+
+        /* ── PROJECTS ── */
+        .section-label {
+            font-size: 8px;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 0.5px;
+            background: var(--border);
+        }
+
+        .projects {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .project {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 0.5px solid var(--border);
+            text-decoration: none;
+            color: inherit;
+            transition: background .15s;
+            cursor: pointer;
+        }
+
+        .project:last-child {
+            border-bottom: none;
+        }
+
+        .project:hover .project-name {
+            color: var(--accent);
+        }
+
+        .project-num {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--border);
+            line-height: 1;
+            width: 36px;
+            flex-shrink: 0;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .project-body { flex: 1; }
+
+        .project-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: .4rem;
+            line-height: 1.4;
+            transition: color .15s;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 6px;
+        }
+
+        .project-tag {
+            font-size: 9px;
+            color: var(--muted);
+        }
+
+        .project-tag::after {
+            content: '·';
+            margin-left: 6px;
+        }
+
+        .project-tag:last-child::after { display: none; }
+
+        .project-arrow {
+            font-size: 16px;
+            color: var(--border);
+            margin-top: 2px;
+            transition: color .15s, transform .15s;
+        }
+
+        .project:hover .project-arrow {
+            color: var(--accent);
+            transform: translate(2px, -2px);
+        }
+
+        /* ── SIDEBAR ── */
+        .sidebar { }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-label {
+            font-size: 8px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--muted);
+            padding-bottom: .5rem;
+            border-bottom: 1.5px solid var(--border-strong);
+            margin-bottom: .75rem;
+        }
+
+        .sidebar-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            border-bottom: 0.5px solid var(--border);
+            font-size: 11px;
+            color: #555;
+        }
+
+        .sidebar-item:last-child { border-bottom: none; }
+
+        .sidebar-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--accent);
+            flex-shrink: 0;
+        }
+
+        /* ── FOOTER ── */
+        .footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--border-strong);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-left {
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .footer-right {
+            font-size: 9px;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+
+    <div class="header">
+        <div class="header-top">
+            <div class="issue">portfolio · <span>web development</span></div>
+            <div class="date">vol.01 · 2026</div>
+        </div>
+
+        <div class="masthead">
+            <div>
+                <div class="name">glaa<em>mur</em></div>
+            </div>
+            <div class="masthead-meta">
+                <strong>fullstack dev</strong>
+                php · js · xsl<br>
+                bitrix · hostcms<br>
+                5 лет опыта
+            </div>
+        </div>
+
+        <div class="tagline">
+            fullstack разработчик · от вёрстки до запуска<br>
+            коммерческая разработка на Bitrix и HostCMS
+        </div>
+    </div>
+
+    <div class="body">
+        <div class="main">
+            <div class="section-label">projects &amp; tools</div>
+            <div class="projects">
+
+                <a class="project" href="./Привязка цветов к переменным/">
+                    <div class="project-num">01</div>
+                    <div class="project-body">
+                        <div class="project-name">Привязка цветов к переменным</div>
+                        <div class="project-tags">
+                            <span class="project-tag">css</span>
+                            <span class="project-tag">js</span>
+                            <span class="project-tag">tool</span>
+                        </div>
+                    </div>
+                    <div class="project-arrow">↗</div>
+                </a>
+
+                
+
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-label">backend</div>
+                <div class="sidebar-item">PHP <span class="sidebar-dot"></span></div>
+                <div class="sidebar-item">MySQL <span class="sidebar-dot"></span></div>
+                <div class="sidebar-item">XSL/XSLT <span class="sidebar-dot"></span></div>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-label">frontend</div>
+                <div class="sidebar-item">JavaScript <span class="sidebar-dot"></span></div>
+                <div class="sidebar-item">HTML/CSS <span class="sidebar-dot"></span></div>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-label">cms</div>
+                <div class="sidebar-item">Bitrix <span class="sidebar-dot"></span></div>
+                <div class="sidebar-item">HostCMS <span class="sidebar-dot"></span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-left">from idea to production</div>
+        <div class="footer-right">glaamur · dorohov.pro · 2026</div>
+    </div>
+
+</div>
+</body>
+</html>
